@@ -1,36 +1,137 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Supreme Group Frontend – Assignment Submission
 
-## Getting Started
+## 🚀 Deployment
 
-First, run the development server:
+- **Live URL:** [https://blacksof-assignment-inky.vercel.app](https://blacksof-assignment-inky.vercel.app)  
+- **GitHub Repo:** [https://github.com/shriyanshbhargava/blacksof-assignment](https://github.com/shriyanshbhargava/blacksof-assignment)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 📁 Tech Stack
+
+- **Framework:** Next.js (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **State Management:** Not required currently. If needed, Zustand would be my preferred choice due to its minimal and scalable API.
+
+---
+
+## 📦 Project Structure
+```
+├── public/
+├── src/
+│ ├── app/
+│ │ ├── layout.tsx
+│ │ └── page.tsx
+│ ├── components/
+│ │ ├── CarouselSection/
+│ │ ├── sections/
+│ │ └── shared/
+│ ├── data/
+│ ├── lib/
+│ │ ├── hooks/
+│ │ ├── types/
+│ │ └── utils/
+│ └── globals.css
+├── .gitignore
+├── next.config.ts
+├── next-env.d.ts
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🧱 Component Architecture
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Components are grouped by feature to enhance reusability and clarity (`CarouselSection`, `shared`, `sections`).
+- Logic-related code like `hooks`, `utils`, and `types` is housed under `lib/` for modular separation.
+- Pages are handled via the App Router in `src/app` using Next.js 13+ standards.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📱 Responsive Design Strategy
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Built using Tailwind’s mobile-first responsive utility classes (`sm:`, `md:`, `lg:`, `xl:`).
+- Manually tested on Chrome DevTools across multiple breakpoints (`320px` to `1440px`).
+- Layouts are fluid, using `flex`, `grid`, and `aspect-ratio` for adaptability.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## ⚡ Performance Optimization
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Used `next/image` for optimized image loading with lazy loading and automatic resizing.
+- Code splitting with dynamic imports (`next/dynamic`) for sections not needed immediately.
+- Avoided unnecessary re-renders using memoization and clean component structure.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## ♿ Accessibility
+
+- All HTML is semantic (e.g., `header`, `main`, `nav`, `section`, `button`).
+- ARIA roles and labels used where necessary.
+- Full keyboard accessibility and logical tab order tested.
+- Color contrast verified via Lighthouse and Figma plugins.
+
+---
+
+## 🎞️ Animations
+
+- **Library Used:** Framer Motion
+- Applied subtle entrance animations on scroll and smooth transitions for interactivity.
+- All animations are performance-friendly and do not block main thread.
+
+---
+
+## 🧪 Testing (Optional)
+
+- No tests implemented in this phase due to time constraints.
+- For future development, would prefer using:
+  - **Unit Tests:** Vitest or Jest
+  - **Component Tests:** React Testing Library
+  - **E2E Tests:** Playwright or Cypress
+
+---
+
+## 🧩 Third-Party Libraries Used
+
+- **Tailwind CSS** – Styling
+- **Framer Motion** – Animations
+- **Next.js** – Framework & Routing
+- **TypeScript** – Type safety
+
+---
+
+## ❗ Assumptions & Decisions
+
+- Static content was assumed, so no global state or dynamic fetching was added.
+- Used `public/` folder structure as per asset categorization (carousel, hero, icons).
+- Skipped heavy animation in favor of fast load times and simplicity.
+
+---
+
+## 🧗 Challenges & Solutions
+
+| Challenge                    | Solution                                                                 |
+|-----------------------------|--------------------------------------------------------------------------|
+| Figma pixel perfection      | Used Figma inspect panel with rulers to exactly match spacing & colors. |
+| Responsive edge handling    | Tweaked Tailwind breakpoints and image scaling manually.                |
+| Class clutter with Tailwind | Used reusable components and grouped class logic cleanly.               |
+
+---
+
+## 🚧 Future Improvements
+
+- Add integration and unit tests.
+- Move content to CMS for easier editing.
+- Improve Lighthouse scores on performance/accessibility.
+- Add skeleton loaders and prefetching for dynamic sections.
+- Animate layout transitions for a richer UX.
+
+---
+
+## 📝 How to Run Locally
+
+```bash
+git clone https://github.com/shriyanshbhargava/blacksof-assignment
+cd blacksof-assignment
+npm install
+npm run dev
