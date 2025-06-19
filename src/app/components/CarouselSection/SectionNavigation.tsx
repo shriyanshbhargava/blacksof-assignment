@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils/utils";
 import { CarouselCategory, SliderProps } from "@/lib/types/carousel";
@@ -18,6 +20,23 @@ export const SectionNavigation: React.FC<SectionNavigationProps> = ({
   sectionsContainerRef,
   onSectionClick,
 }) => {
+  const [windowWidth, setWindowWidth] = useState(0);
+
+  useEffect(() => {
+    // Set initial window width
+    setWindowWidth(window.innerWidth);
+
+    // Handle window resize
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const nextSection = () => {
     if (activeSectionIndex < carouselShowcaseData.length - 1) {
       onSectionClick(activeSectionIndex + 1);
@@ -63,11 +82,11 @@ export const SectionNavigation: React.FC<SectionNavigationProps> = ({
           >
             <ChevronLeft className="w-5 h-5" />
           </motion.button>
-          
+
           <span className="text-sm text-gray-400">
             {activeSectionIndex + 1} of {carouselShowcaseData.length}
           </span>
-          
+
           <motion.button
             onClick={nextSection}
             disabled={activeSectionIndex === carouselShowcaseData.length - 1}
@@ -89,11 +108,14 @@ export const SectionNavigation: React.FC<SectionNavigationProps> = ({
               const threshold = 100;
               if (info.offset.x > threshold && activeSectionIndex > 0) {
                 onSectionClick(activeSectionIndex - 1);
-              } else if (info.offset.x < -threshold && activeSectionIndex < carouselShowcaseData.length - 1) {
+              } else if (
+                info.offset.x < -threshold &&
+                activeSectionIndex < carouselShowcaseData.length - 1
+              ) {
                 onSectionClick(activeSectionIndex + 1);
               }
             }}
-            animate={{ x: -activeSectionIndex * (window.innerWidth * 0.8 + 16) }}
+            animate={{ x: -activeSectionIndex * (windowWidth * 0.8 + 16) }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
           >
             {carouselShowcaseData.map((section, index) => (
@@ -101,7 +123,7 @@ export const SectionNavigation: React.FC<SectionNavigationProps> = ({
                 key={section.id}
                 onClick={() => onSectionClick(index)}
                 className="flex-shrink-0 mt-[5rem] rounded-lg p-4 border border-black text-left snap-center"
-                style={{ width: '80vw' }}
+                style={{ width: "80vw" }}
                 animate={{
                   opacity: activeSectionIndex === index ? 1 : 0.6,
                   scale: activeSectionIndex === index ? 1 : 0.95,

@@ -5,40 +5,30 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 const Header: React.FC = () => {
-  const [visibility, setVisibility] = useState("translate-y-0");
-  const [previousScrollY, setPreviousScrollY] = useState(0);
-
-  const handleScrollBehavior = () => {
-    const currentScrollPosition = window.scrollY;
-
-    if (currentScrollPosition > 200) {
-      // Handle scroll direction
-      if (currentScrollPosition > previousScrollY) {
-        setVisibility("-translate-y-[80px]"); // Hide navigation
-      } else {
-        setVisibility("translate-y-0 shadow-lg"); // Show with shadow
-      }
-    } else {
-      setVisibility("translate-y-0"); // Always visible near top
-    }
-
-    setPreviousScrollY(currentScrollPosition);
-  };
+  const [headerClass, setHeaderClass] = useState("translate-y-0");
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScrollBehavior);
+    const handleScrollBehavior = () => {
+      const currentScrollPosition = window.scrollY;
+      currentScrollPosition > 200
+        ? currentScrollPosition > 0
+          ? setHeaderClass("-translate-y-[80px]")
+          : setHeaderClass("translate-y-0 shadow-lg")
+        : setHeaderClass("translate-y-0");
+    };
 
+    window.addEventListener("scroll", handleScrollBehavior);
     return () => {
       window.removeEventListener("scroll", handleScrollBehavior);
     };
-  }, [previousScrollY]);
+  }, []);
 
   return (
     <header
       className={`
         fixed top-0 left-0 right-0 bg-white z-50 transition-transform duration-300
         2xl:py-4 xlg:py-1 py-3
-        ${visibility}
+        ${headerClass}
       `}
     >
       <div className="max-w-7xl mx-auto h-full xlg:py-3 py-1 mt-[2px] flex gap-4 items-center justify-between px-4">
