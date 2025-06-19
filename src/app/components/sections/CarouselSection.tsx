@@ -78,7 +78,7 @@ const CarouselSection: React.FC = () => {
   };
 
   // Only calculate slider props if the ref is available
-  const sliderProps = sectionsContainerRef.current 
+  const sliderProps = sectionsContainerRef.current
     ? calculateSliderProps(
         sectionElements,
         activeSectionIndex,
